@@ -4,7 +4,9 @@ export default function Header() {
   return (
     <header className="flex justify-between mx-auto sm:container pt-5 text-xl">
       <div>
-        <h1 className="text-red-500">ChessBoard</h1>
+        <Link to="/" className="text-red-500">
+          ChessBoard
+        </Link>
       </div>
       <div>
         <Link to="/about" className="text-white">

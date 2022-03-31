@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [username, setUsername] = useState("");
@@ -6,15 +7,29 @@ export default function Home() {
   const [ready, setReady] = useState(false);
   const [info, setInfo] = useState([]);
 
+  const navigate = useNavigate();
+
   // maybe validate on home page and then navigate to another route and pass it the username and it does all the fetching.
+
+  //   function checkUsername(username) {
+  //     fetch(`https://api.chess.com/pub/player/${username.toLowerCase()}`).then(
+  //       (response) => {
+  //         setReady(true);
+  //         if (response.ok) {
+  //           let j = response.json().then((j) => setInfo(j));
+
+  //           setValid(true);
+  //         }
+  //       }
+  //     );
+  //   }
 
   function checkUsername(username) {
     fetch(`https://api.chess.com/pub/player/${username.toLowerCase()}`).then(
       (response) => {
         setReady(true);
         if (response.ok) {
-          let j = response.json().then((j) => setInfo(j));
-          setValid(true);
+          navigate(`/dashboard?username=${username}`);
         }
       }
     );
