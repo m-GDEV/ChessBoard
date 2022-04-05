@@ -39,6 +39,16 @@ export default function Dashboard() {
     document.title = `${username} - ChessBoard`;
   }, []);
 
+  const winRate = (stat) => {
+    let win = stat.record.win;
+    let loss = stat.record.loss;
+    let draw = stat.record.draw;
+
+    return (
+      Math.round(((2 * (win + draw)) / (2 * (win + loss + draw))) * 100) + "%"
+    );
+  };
+
   if (loading) {
     return <div>Loading</div>;
   } else {
@@ -140,6 +150,9 @@ export default function Dashboard() {
                         {stat.record.draw} Draws
                       </button>
                     </div>
+                    <button className="px-5 py-0.5 w-1/2 mt-2 rounded-[30px] bg-b-button text-blue-500 font-bold">
+                      {winRate(stat)} Win Rate
+                    </button>
                   </div>
                 </Tabs.Tab>
               ))}
@@ -181,6 +194,7 @@ export default function Dashboard() {
                   </div>
                 </Tabs.Tab>
               ))}
+              {/* gives errors, should be a tab but then it messes up the layout */}
               <p></p>
             </Tabs>
           </MantineProvider>
